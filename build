@@ -1,0 +1,38 @@
+#!/usr/bin/env perl
+#
+# A simple include file processor
+
+use strict;
+use warnings;
+
+$| = 1;
+
+for my $input (@ARGV) {
+  unless ($input =~ m/\.inc\z/) {
+    die "input file does not end in .inc: $input\n";
+  }
+  my $output = $input;
+  $output =~ s/\.inc//;
+  print "Processing $output\n";
+  process_file($input, $output);
+}
+
+sub process_file {
+  my ($input, $output) = @_;
+  open(my $in, "<", $input) or die "unable to read $input: $!\n";
+  open(my $out, ">", $output) or die "unable to write $output: $!\n";
+  while (<$in>) {
+    if (m/^\@include\s+(\S+)/) {
+      # no nested includes
+      my $contents;
+      { my $incl = $1;
+        open(my $fh, "<", $incl) or die "unable to read include file $incl: $!\n";
+        $contents = do { local $/; <$fh> };
+      }
+      print {$out} $contents;
+    } else {
+      print {$out} $_;
+    }
+  }
+}
+

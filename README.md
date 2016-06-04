@@ -7,6 +7,7 @@ numeric id for use in other commands.
 
 Example:
 
+    $ build fgm.bash.inc      # produces fgm.bash
     $ source fgm.bash
 
     # find .js files
