@@ -1,8 +1,8 @@
 
 My `f`, `g` and `m` commands
 
-The `fgm` package remembers the matches returned by `find`
-and `grep` commands and lets you refer to those results by
+The `fgm` package remembers the matches returned by `find`,
+`grep` and `ag` and lets you refer to those results by
 numeric id for use in other commands.
 
 Example:
@@ -20,6 +20,7 @@ Example:
     # run `wc` on the third match
     $ m 3 wc
 
+    # grep for 'newtype.*Int"
     $ g newtype Int
     1 ./src/Name/Id.hs:75:newtype Id = Id Int
     2 ./src/Name/Id.hs:100:newtype IdSet = IdSet IS.IntSet
@@ -28,4 +29,12 @@ Example:
 
     # open vi on the second match
     $ m 2 vi
+
+    # search using `ag`
+    gg -G .cabal io-streams
+    1 ...
+    2 ...
+    ...
+
+
 
