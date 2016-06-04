@@ -3,6 +3,8 @@
 use strict;
 use warnings;
 
+$| = 1;
+
 my $RED = "\e[01;31m";
 my $PURPLE = "\e[35m";
 my $GREEN =  "\e[32m";
